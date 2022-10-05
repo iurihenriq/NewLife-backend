@@ -8,14 +8,22 @@ import br.com.itbeta.newlife.repository.projections.MoradorDetails;
 import br.com.itbeta.newlife.service.FuncionariosService;
 import br.com.itbeta.newlife.service.MoradoresService;
 import lombok.AllArgsConstructor;
+import org.apache.poi.openxml4j.exceptions.OpenXML4JException;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.xml.sax.SAXException;
 
 import javax.transaction.Transactional;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 @RestController
@@ -52,6 +60,20 @@ public class MoradorController {
     public ResponseEntity<?> createMorador (@RequestBody MoradorForm form) {
         this.service.createMorador(form);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/import")
+    public ResponseEntity<?> importInitiative(
+            @RequestPart(value = "file", required = true) MultipartFile file,
+            @RequestHeader HttpHeaders headers
+    ) throws IOException,
+            NoSuchAlgorithmException,
+            ParserConfigurationException,
+            SAXException,
+            OpenXML4JException,
+            URISyntaxException {
+        this.service.importMorador(file);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping("/{idMorador}")

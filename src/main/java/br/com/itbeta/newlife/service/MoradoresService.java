@@ -13,19 +13,31 @@ import br.com.itbeta.newlife.repository.projections.MoradorDetails;
 import br.com.itbeta.newlife.repository.specifications.FuncionarioSpecification;
 import br.com.itbeta.newlife.repository.specifications.MoradorSpecification;
 import lombok.AllArgsConstructor;
+import org.apache.poi.openxml4j.exceptions.OpenXML4JException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.security.NoSuchAlgorithmException;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 @Service
 @AllArgsConstructor
 public class MoradoresService {
 
+    private final FileService fileService;
     private final MoradorRepository repository;
+    private final ImportService importService;
     private final ApartamentoRepository apartamentoRepository;
 
     public MoradorForm findById(Long idMorador) {
@@ -78,4 +90,12 @@ public class MoradoresService {
         return this.repository.findAllList(query);
     }
 
+    public void importMorador(MultipartFile file) throws IOException, NoSuchAlgorithmException, ParserConfigurationException, OpenXML4JException, SAXException {
+        Path filePath = this.fileService.save(file,"");
+        try{
+            this.importService.importSheet(file.getInputStream());
+        }catch(Exception e){
+            throw e;
+        }
+    }
 }
