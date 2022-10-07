@@ -1,9 +1,7 @@
 package br.com.itbeta.newlife.service;
 
-import br.com.itbeta.newlife.controller.dto.FuncionarioDto;
 import br.com.itbeta.newlife.controller.form.FuncionarioForm;
 import br.com.itbeta.newlife.model.Funcionario;
-import br.com.itbeta.newlife.model.Morador;
 import br.com.itbeta.newlife.repository.ApartamentoRepository;
 import br.com.itbeta.newlife.repository.FuncionarioRepository;
 import br.com.itbeta.newlife.repository.specifications.FuncionarioSpecification;
@@ -21,12 +19,13 @@ public class FuncionariosService {
     private final FuncionarioRepository repository;
 
     private final ApartamentoRepository apartamentoRepository;
+
     public FuncionarioForm findById(Long idFuncionario) {
         Funcionario f = this.repository.findById(idFuncionario).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         return new FuncionarioForm(f);
     }
 
-    public void createFuncionario (FuncionarioForm form) {
+    public void createFuncionario(FuncionarioForm form) {
         Funcionario f = Funcionario
                 .builder()
                 .nome(form.getNome())
@@ -40,15 +39,15 @@ public class FuncionariosService {
         this.repository.save(f);
     }
 
-    public void updateFuncionario (Long idFuncionario, FuncionarioForm form) {
-        Funcionario f = this.repository.findById(idFuncionario).orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    public void updateFuncionario(Long idFuncionario, FuncionarioForm form) {
+        Funcionario f = this.repository.findById(idFuncionario).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         f.addApartamentos(this.apartamentoRepository.findById(form.getApartamento()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)));
         f.update(form);
         repository.save(f);
     }
 
-    public void deleteFuncionario (Long idFuncionario) {
-        Funcionario f = this.repository.findById(idFuncionario).orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    public void deleteFuncionario(Long idFuncionario) {
+        Funcionario f = this.repository.findById(idFuncionario).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         repository.delete(f);
     }
 

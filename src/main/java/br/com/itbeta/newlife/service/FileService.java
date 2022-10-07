@@ -16,7 +16,7 @@ import java.util.UUID;
 public class FileService {
     private final Path pathRoot;
 
-    FileService(@Value("${file-root-path}") String pathRoot){
+    FileService(@Value("${file-root-path}") String pathRoot) {
         this.pathRoot = Paths.get(pathRoot);
     }
 
@@ -27,7 +27,7 @@ public class FileService {
         return initiativePath;
     }
 
-    public File emptyFile(String path){
+    public File emptyFile(String path) {
         Path resolve = this.pathRoot.resolve(path).resolve(UUID.randomUUID() + "-linhas-com-erro.xlsx");
         return resolve.toFile();
     }
@@ -39,7 +39,7 @@ public class FileService {
     public void removeFile(String filePath) {
         try {
             Files.delete(Paths.get(filePath));
-        } catch (Exception e){
+        } catch (Exception e) {
             //
         }
     }

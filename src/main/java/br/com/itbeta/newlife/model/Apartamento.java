@@ -1,14 +1,11 @@
 package br.com.itbeta.newlife.model;
 
-import br.com.itbeta.newlife.controller.dto.ApartamentoDto;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
-@Table (name = "apartamento")
+@Table(name = "apartamento")
 @Getter
 @Setter
 @Builder
@@ -16,11 +13,12 @@ import java.util.Set;
 @AllArgsConstructor
 public class Apartamento {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "idApartamento")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idApartamento")
     private Long idApartamento;
 
-    @Column (name = "numero")
+    @Column(name = "numero")
     private int numero;
 
 }

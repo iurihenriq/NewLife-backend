@@ -1,12 +1,8 @@
 package br.com.itbeta.newlife.controller;
 
 import br.com.itbeta.newlife.controller.dto.ApartamentoDto;
-import br.com.itbeta.newlife.controller.dto.FuncionarioDto;
-import br.com.itbeta.newlife.controller.form.FuncionarioForm;
-import br.com.itbeta.newlife.conversor.EntityToDto;
 import br.com.itbeta.newlife.repository.projections.ApartamentoDetails;
 import br.com.itbeta.newlife.service.ApartamentosService;
-import br.com.itbeta.newlife.service.FuncionariosService;
 import lombok.AllArgsConstructor;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.data.domain.Page;
@@ -14,8 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.transaction.Transactional;
 import java.util.List;
 
 @RestController

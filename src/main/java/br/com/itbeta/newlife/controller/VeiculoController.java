@@ -1,10 +1,7 @@
 package br.com.itbeta.newlife.controller;
 
-import br.com.itbeta.newlife.controller.dto.FuncionarioDto;
 import br.com.itbeta.newlife.controller.dto.VeiculoDto;
-import br.com.itbeta.newlife.controller.form.FuncionarioForm;
 import br.com.itbeta.newlife.controller.form.VeiculoForm;
-import br.com.itbeta.newlife.service.FuncionariosService;
 import br.com.itbeta.newlife.service.VeiculosService;
 import lombok.AllArgsConstructor;
 import org.springframework.core.convert.ConversionService;

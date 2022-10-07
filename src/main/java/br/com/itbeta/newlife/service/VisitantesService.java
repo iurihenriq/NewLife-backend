@@ -1,16 +1,9 @@
 package br.com.itbeta.newlife.service;
 
-import br.com.itbeta.newlife.controller.dto.MoradorDto;
-import br.com.itbeta.newlife.controller.dto.VisitanteDto;
-import br.com.itbeta.newlife.controller.form.MoradorForm;
-import br.com.itbeta.newlife.controller.form.VeiculoForm;
 import br.com.itbeta.newlife.controller.form.VisitanteForm;
-import br.com.itbeta.newlife.model.Morador;
 import br.com.itbeta.newlife.model.Visitante;
 import br.com.itbeta.newlife.repository.ApartamentoRepository;
-import br.com.itbeta.newlife.repository.MoradorRepository;
 import br.com.itbeta.newlife.repository.VisitanteRepository;
-import br.com.itbeta.newlife.repository.specifications.MoradorSpecification;
 import br.com.itbeta.newlife.repository.specifications.VisitanteSpecification;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -30,7 +23,7 @@ public class VisitantesService {
         return new VisitanteForm(m);
     }
 
-    public void createVisitante (VisitanteForm form) {
+    public void createVisitante(VisitanteForm form) {
         Visitante v = Visitante
                 .builder()
                 .nome(form.getNome())
@@ -44,15 +37,15 @@ public class VisitantesService {
         this.repository.save(v);
     }
 
-    public void updateVisitante (Long idVisitante, VisitanteForm form) {
-        Visitante v = this.repository.findById(idVisitante).orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    public void updateVisitante(Long idVisitante, VisitanteForm form) {
+        Visitante v = this.repository.findById(idVisitante).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         v.addApartamentos(this.apartamentoRepository.findById(form.getApartamento()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)));
         v.update(form);
         repository.save(v);
     }
 
-    public void deleteVisitante (Long idVisitante) {
-        Visitante v = this.repository.findById(idVisitante).orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    public void deleteVisitante(Long idVisitante) {
+        Visitante v = this.repository.findById(idVisitante).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         repository.delete(v);
     }
 
@@ -63,5 +56,4 @@ public class VisitantesService {
     public Page<Visitante> findAll(Pageable pageable, String query) {
         return this.repository.findAll(VisitanteSpecification.likeGenericQuery(query), pageable);
     }
-
 }

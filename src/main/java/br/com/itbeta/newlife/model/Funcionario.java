@@ -2,8 +2,6 @@ package br.com.itbeta.newlife.model;
 
 import br.com.itbeta.newlife.controller.form.FuncionarioForm;
 import lombok.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -18,33 +16,33 @@ public class Funcionario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "idFuncionario")
+    @Column(name = "idFuncionario")
     private Long idFuncionario;
 
     @ManyToOne
-    @JoinColumn (name = "apartamento")
+    @JoinColumn(name = "apartamento")
     private Apartamento apartamento;
 
-    @Column (name = "nome")
+    @Column(name = "nome")
     private String nome;
 
-    @Column (name = "rg")
+    @Column(name = "rg")
     private String rg;
 
-    @Column (name = "cpf")
+    @Column(name = "cpf")
     private String cpf;
 
-    @Column (name = "telefonePrincipal")
+    @Column(name = "telefonePrincipal")
     private String telefonePrincipal;
 
-    @Column (name = "telefoneSecundario")
+    @Column(name = "telefoneSecundario")
     private String telefoneSecundario;
 
-    @Column (name = "observacoes")
+    @Column(name = "observacoes")
     private String observacoes;
 
 
-    public Funcionario (FuncionarioForm form) {
+    public Funcionario(FuncionarioForm form) {
 //        this.apartamento = form.getApartamento();
         this.nome = form.getNome();
         this.rg = form.getRg();
@@ -54,7 +52,7 @@ public class Funcionario {
         this.observacoes = form.getObservacoes();
     }
 
-    public void update (FuncionarioForm form) {
+    public void update(FuncionarioForm form) {
 //        this.apartamento = form.getApartamento();
         this.nome = form.getNome();
         this.rg = form.getRg();
@@ -64,7 +62,7 @@ public class Funcionario {
         this.observacoes = form.getObservacoes();
     }
 
-    public void addApartamentos(Apartamento idApto){
+    public void addApartamentos(Apartamento idApto) {
         this.apartamento = idApto;
     }
 }

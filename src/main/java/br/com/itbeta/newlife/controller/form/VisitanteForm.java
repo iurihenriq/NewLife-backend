@@ -1,13 +1,9 @@
 package br.com.itbeta.newlife.controller.form;
 
-import br.com.itbeta.newlife.conversor.EntityToDto;
-import br.com.itbeta.newlife.model.Apartamento;
 import br.com.itbeta.newlife.model.Visitante;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-
-import javax.persistence.Column;
 
 @Getter
 @Setter

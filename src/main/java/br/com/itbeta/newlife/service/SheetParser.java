@@ -41,7 +41,7 @@ public class SheetParser<T> {
 
         @Override
         public void endRow(int rowNum) {
-            if(rowNum == 0){
+            if (rowNum == 0) {
                 return;
             }
             SheetRow row = new SheetRow(this.row, this.currentRow);
@@ -52,10 +52,10 @@ public class SheetParser<T> {
         @Override
         public void cell(String cellReference, String formattedValue,
                          XSSFComment comment) {
-            if(currentRow == 0){
+            if (currentRow == 0) {
                 return;
             }
-            if(cellReference == null) {
+            if (cellReference == null) {
                 cellReference = new CellAddress(currentRow, currentCol).formatAsString();
             }
             int thisCol = (new CellReference(cellReference)).getCol();
@@ -68,11 +68,13 @@ public class SheetParser<T> {
             this.row[currentCol] = formattedValue;
         }
     }
+
     private final OPCPackage xlsxPackage;
     private final int minColumns;
-    private final Function<SheetRow,T> mapper;
+    private final Function<SheetRow, T> mapper;
     private final Stream.Builder<T> streamBuilder = Stream.builder();
-    public SheetParser(OPCPackage pkg, int minColumns, Function<SheetRow,T> mapper) {
+
+    public SheetParser(OPCPackage pkg, int minColumns, Function<SheetRow, T> mapper) {
         this.xlsxPackage = pkg;
         this.minColumns = minColumns;
 
@@ -92,10 +94,11 @@ public class SheetParser<T> {
                     styles, null, strings, sheetHandler, formatter, false);
             sheetParser.setContentHandler(handler);
             sheetParser.parse(sheetSource);
-        } catch(ParserConfigurationException e) {
+        } catch (ParserConfigurationException e) {
             throw new RuntimeException("SAX parser appears to be broken - " + e.getMessage());
         }
     }
+
     public Stream<T> process() throws IOException, OpenXML4JException, SAXException {
         ReadOnlySharedStringsTable strings = new ReadOnlySharedStringsTable(this.xlsxPackage);
         XSSFReader xssfReader = new XSSFReader(this.xlsxPackage);

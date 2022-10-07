@@ -2,13 +2,11 @@ package br.com.itbeta.newlife.model;
 
 import br.com.itbeta.newlife.controller.form.VeiculoForm;
 import lombok.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
 @Entity
-@Table (name = "veiculo")
+@Table(name = "veiculo")
 @Getter
 @Setter
 @Builder
@@ -18,26 +16,26 @@ public class Veiculo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "idVeiculo")
+    @Column(name = "idVeiculo")
     private Long idVeiculo;
 
     @ManyToOne
-    @JoinColumn (name = "apartamento")
+    @JoinColumn(name = "apartamento")
     private Apartamento apartamento;
 
-    @Column (name = "placa")
+    @Column(name = "placa")
     private String placa;
 
-    @Column (name = "marca")
+    @Column(name = "marca")
     private String marca;
 
-    @Column (name = "modelo")
+    @Column(name = "modelo")
     private String modelo;
 
-    @Column (name = "cor")
+    @Column(name = "cor")
     private String cor;
 
-    public Veiculo (VeiculoForm form) {
+    public Veiculo(VeiculoForm form) {
 //        this.apartamento = form.getApartamento();
         this.placa = form.getPlaca();
         this.marca = form.getMarca();
@@ -45,7 +43,7 @@ public class Veiculo {
         this.cor = form.getCor();
     }
 
-    public void update (VeiculoForm form) {
+    public void update(VeiculoForm form) {
 //        this.apartamento = form.getApartamento();
         this.placa = form.getPlaca();
         this.marca = form.getMarca();
@@ -53,7 +51,7 @@ public class Veiculo {
         this.cor = form.getCor();
     }
 
-    public void addApartamentos(Apartamento idApto){
+    public void addApartamentos(Apartamento idApto) {
         this.apartamento = idApto;
     }
 }

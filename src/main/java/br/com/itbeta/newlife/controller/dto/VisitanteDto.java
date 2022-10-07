@@ -1,11 +1,8 @@
 package br.com.itbeta.newlife.controller.dto;
 
 import br.com.itbeta.newlife.conversor.EntityToDto;
-import br.com.itbeta.newlife.model.Apartamento;
 import br.com.itbeta.newlife.model.Visitante;
 import lombok.Getter;
-
-import javax.persistence.Column;
 
 @Getter
 public class VisitanteDto {

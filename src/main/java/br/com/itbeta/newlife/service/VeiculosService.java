@@ -1,15 +1,9 @@
 package br.com.itbeta.newlife.service;
 
-import br.com.itbeta.newlife.controller.dto.MoradorDto;
-import br.com.itbeta.newlife.controller.dto.VeiculoDto;
-import br.com.itbeta.newlife.controller.form.MoradorForm;
 import br.com.itbeta.newlife.controller.form.VeiculoForm;
-import br.com.itbeta.newlife.model.Morador;
 import br.com.itbeta.newlife.model.Veiculo;
 import br.com.itbeta.newlife.repository.ApartamentoRepository;
-import br.com.itbeta.newlife.repository.MoradorRepository;
 import br.com.itbeta.newlife.repository.VeiculoRepository;
-import br.com.itbeta.newlife.repository.specifications.MoradorSpecification;
 import br.com.itbeta.newlife.repository.specifications.VeiculoSpecification;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -30,7 +24,7 @@ public class VeiculosService {
         return new VeiculoForm(v);
     }
 
-    public void createVeiculo (VeiculoForm form) {
+    public void createVeiculo(VeiculoForm form) {
         Veiculo m = Veiculo
                 .builder()
                 .placa(form.getPlaca())
@@ -42,15 +36,15 @@ public class VeiculosService {
         this.repository.save(m);
     }
 
-    public void updateVeiculo (Long idVeiculo, VeiculoForm form) {
-        Veiculo v = this.repository.findById(idVeiculo).orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    public void updateVeiculo(Long idVeiculo, VeiculoForm form) {
+        Veiculo v = this.repository.findById(idVeiculo).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         v.addApartamentos(this.apartamentoRepository.findById(form.getApartamento()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)));
         v.update(form);
         repository.save(v);
     }
 
-    public void deleteVeiculo (Long idVeiculo) {
-        Veiculo v = this.repository.findById(idVeiculo).orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    public void deleteVeiculo(Long idVeiculo) {
+        Veiculo v = this.repository.findById(idVeiculo).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         repository.delete(v);
     }
 
@@ -61,6 +55,4 @@ public class VeiculosService {
     public Page<Veiculo> findAll(Pageable pageable, String query) {
         return this.repository.findAll(VeiculoSpecification.likeGenericQuery(query), pageable);
     }
-
-
 }

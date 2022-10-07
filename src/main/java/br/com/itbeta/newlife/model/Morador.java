@@ -2,13 +2,11 @@ package br.com.itbeta.newlife.model;
 
 import br.com.itbeta.newlife.controller.form.MoradorForm;
 import lombok.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
 @Entity
-@Table (name = "morador")
+@Table(name = "morador")
 @Getter
 @Setter
 @Builder
@@ -18,41 +16,41 @@ public class Morador {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "idMorador")
+    @Column(name = "idMorador")
     private Long idMorador;
 
     @ManyToOne
-    @JoinColumn (name = "apartamento")
+    @JoinColumn(name = "apartamento")
     private Apartamento apartamento;
 
-    @Column (name = "email")
+    @Column(name = "email")
     private String email;
 
-    @Column (name = "nomeContatoEmergencial")
+    @Column(name = "nomeContatoEmergencial")
     private String nomeContatoEmergencial;
 
-    @Column (name = "telefoneContatoEmergencial")
+    @Column(name = "telefoneContatoEmergencial")
     private String telefoneContatoEmergencial;
 
     @Column(name = "nome")
     private String nome;
 
-    @Column (name = "rg")
+    @Column(name = "rg")
     private String rg;
 
-    @Column (name = "cpf")
+    @Column(name = "cpf")
     private String cpf;
 
-    @Column (name = "telefonePrincipal")
+    @Column(name = "telefonePrincipal")
     private String telefonePrincipal;
 
-    @Column (name = "telefoneSecundario")
+    @Column(name = "telefoneSecundario")
     private String telefoneSecundario;
 
-    @Column (name = "observacoes")
+    @Column(name = "observacoes")
     private String observacoes;
 
-    public Morador (MoradorForm form) {
+    public Morador(MoradorForm form) {
 //        this.apartamento = form.getApartamento();
         this.email = form.getEmail();
         this.nomeContatoEmergencial = form.getNomeContatoEmergencial();
@@ -65,7 +63,7 @@ public class Morador {
         this.observacoes = form.getObservacoes();
     }
 
-    public void update (MoradorForm form) {
+    public void update(MoradorForm form) {
 //        this.apartamento = form.getApartamento();
         this.email = form.getEmail();
         this.nomeContatoEmergencial = form.getNomeContatoEmergencial();
@@ -78,7 +76,7 @@ public class Morador {
         this.observacoes = form.getObservacoes();
     }
 
-    public void addApartamentos(Apartamento idApto){
+    public void addApartamentos(Apartamento idApto) {
         this.apartamento = idApto;
     }
 }

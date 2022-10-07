@@ -1,8 +1,5 @@
 package br.com.itbeta.newlife.controller.form;
 
-import br.com.itbeta.newlife.controller.dto.ApartamentoDto;
-import br.com.itbeta.newlife.conversor.EntityToDto;
-import br.com.itbeta.newlife.model.Apartamento;
 import br.com.itbeta.newlife.model.Funcionario;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
